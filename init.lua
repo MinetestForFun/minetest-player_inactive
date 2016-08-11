@@ -20,7 +20,8 @@ local function check_moved()
          --print("Player: "..plname..", Dist: "..d)
          if d < MINDIST then
             time_afk[plname] = (time_afk[plname] or 0) + INTERVAL
-            if time_afk[plname] >= TIMEOUT then
+            if time_afk[plname] >= TIMEOUT and
+               not minetest.check_player_privs(plname, {ban=true}) then
                minetest.kick_player(plname,
                      "Inactive for "..TIMEOUT.." seconds.")
                kicked = true
