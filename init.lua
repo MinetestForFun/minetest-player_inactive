@@ -43,3 +43,7 @@ minetest.register_on_leaveplayer(function(player)
    time_afk[plname] = nil
    last_pos[plname] = nil
 end)
+
+minetest.register_on_chat_message(function(plname, message)
+   time_afk[plname] = 0
+end)
