@@ -13,7 +13,7 @@ local last_pos = { }
 local function check_moved()
    for _, p in ipairs(minetest.get_connected_players()) do
       local plname = p:get_player_name()
-      local pos = p:getpos()
+      local pos = p:get_pos()
       local kicked
       if last_pos[plname] then
          local d = vector.distance(last_pos[plname], pos)
@@ -21,7 +21,7 @@ local function check_moved()
          if d < MINDIST then
             time_afk[plname] = (time_afk[plname] or 0) + INTERVAL
             if time_afk[plname] >= TIMEOUT and
-               not minetest.check_player_privs(plname, {ban=true}) then
+               not minetest.check_player_privs(plname, {ban = true}) then
                minetest.kick_player(plname,
                      "Inactive for "..TIMEOUT.." seconds.")
                kicked = true
